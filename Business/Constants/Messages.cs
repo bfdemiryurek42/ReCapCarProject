@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Core.Entities.Conrete;
+using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Business.Constants
@@ -22,5 +24,12 @@ namespace Business.Constants
         public static string CustomersListed = "Customers are Listed";
         public static string NotRented = "Car can not be rented";
         public static string RentalAdded = "Rental Added!";
+        public static string AuthorizationDenied = "Unauthorized user";
+        internal static string UserRegistered;
+        internal static User UserNotFound;
+        internal static User PasswordError;
+        internal static string SuccessfulLogin;
+        internal static string UserAlreadyExists;
+        internal static string AccessTokenCreated;
     }
 }
