@@ -47,9 +47,9 @@ namespace Business.Concrete
         }
 
         [CacheAspect]
-        public IDataResult<CarDetailDto> GetById(int carId)
+        public IDataResult<CarDetailDto> GetById(int id)
         {
-            return new SuccessDataResult<CarDetailDto>(_carDal.GetCarById(c => c.Id == carId));
+            return new SuccessDataResult<CarDetailDto>(_carDal.GetCarById(c => c.Id == id));
         }
 
         public IDataResult<List<CarDetailDto>> GetCarDetails()
