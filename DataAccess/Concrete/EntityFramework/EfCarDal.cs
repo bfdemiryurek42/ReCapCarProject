@@ -31,7 +31,7 @@ namespace DataAccess.Concrete.EntityFramework
         }
 
 
-        public CarDetailDto GetCarDetailsById(Expression<Func<Car, bool>> filter = null)
+        public List<CarDetailDto> GetCarDetailsById(Expression<Func<Car, bool>> filter = null)
         {
             using (ReCapCarContext context = new ReCapCarContext())
             {
@@ -49,6 +49,37 @@ namespace DataAccess.Concrete.EntityFramework
                                  ColorName = col.ColorName,
                                  DailyPrice = car.DailyPrice,
                                  Description = car.Description,
+                                 BrandId = car.BrandId,
+                                 ColorId = car.ColorId
+                                 //ImagePath = @"\images\default.jfif",
+                                 //CarImages = new List<CarImages>()
+                             };
+
+                return result.ToList();
+
+
+            }
+        }
+        public CarDetailDto GetCarById(Expression<Func<Car, bool>> filter = null)
+        {
+            using (ReCapCarContext context = new ReCapCarContext())
+            {
+                var result =
+                             from car in filter == null ? context.Cars : context.Cars.Where(filter)
+                             join br in context.Brands
+                              on car.BrandId equals br.BrandId
+                             join col in context.Colors
+                            on car.ColorId equals col.ColorId
+
+                             select new CarDetailDto
+                             {
+                                 Id = car.Id,
+                                 BrandName = br.BrandName,
+                                 ColorName = col.ColorName,
+                                 DailyPrice = car.DailyPrice,
+                                 Description = car.Description,
+                                 BrandId = car.BrandId,
+                                 ColorId = car.ColorId
                                  //ImagePath = @"\images\default.jfif",
                                  //CarImages = new List<CarImages>()
                              };
